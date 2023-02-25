@@ -1,9 +1,10 @@
 import { Text, View } from "react-native";
+import { Header } from "../../components/Header";
 
 export function SigIn() {
   return (
     <View>
-      <Text>SignIn</Text>
+      <Header title="Login" />
     </View>
   );
 }
