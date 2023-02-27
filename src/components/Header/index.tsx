@@ -3,7 +3,12 @@ import { Ionicons } from "@expo/vector-icons";
 
 import styles from "./styles";
 
-export function Header({ title, hasGoBack = true }) {
+interface HeaderProps {
+  title: string;
+  hasGoBack?: boolean;
+}
+
+export function Header({ title, hasGoBack = true }: HeaderProps) {
   return (
     <View style={styles.container}>
       {hasGoBack ? (
