@@ -46,6 +46,10 @@ export function SigIn() {
       <View style={styles.buttonContainer}>
         <Button title="Login" onPress={() => Alert.alert("Realiza login")} />
       </View>
+      <TouchableOpacity style={styles.registerButton}>
+        <Text style={styles.registerTitle}>Não tem conta?</Text>
+        <Text style={styles.registerTitleBold}>Cadastre-se</Text>
+      </TouchableOpacity>
     </View>
   );
 }
