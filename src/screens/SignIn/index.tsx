@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, Text, View, Alert } from "react-native";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -36,6 +36,12 @@ export function SigIn() {
           onPress={toggleShowPassword}
         />
       </View>
+      <TouchableOpacity
+        style={styles.forgotPassword}
+        onPress={() => Alert.alert("Esqueceu a senha?")}
+      >
+        <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
+      </TouchableOpacity>
     </View>
   );
 }

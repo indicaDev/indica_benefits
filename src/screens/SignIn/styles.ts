@@ -9,6 +9,14 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 20,
   },
+  forgotPassword: {
+    alignSelf: "center",
+    marginTop: 21,
+  },
+  forgotPasswordText: {
+    fontSize: 20,
+    color: "#5D5FEF",
+  },
 });
 
 export default styles;
