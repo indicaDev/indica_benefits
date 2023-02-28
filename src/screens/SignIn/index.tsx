@@ -3,6 +3,7 @@ import { TouchableOpacity, Text, View, Alert } from "react-native";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { Button } from "../../components/Button";
 
 import styles from "./styles";
 
@@ -42,6 +43,9 @@ export function SigIn() {
       >
         <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <Button title="Login" onPress={() => Alert.alert("Realiza login")} />
+      </View>
     </View>
   );
 }

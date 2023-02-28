@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#5D5FEF",
   },
+  buttonContainer: {
+    paddingHorizontal: 20,
+    marginTop: 25,
+  },
 });
 
 export default styles;
