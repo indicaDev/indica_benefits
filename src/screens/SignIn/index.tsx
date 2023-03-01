@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -62,6 +63,15 @@ export function SigIn() {
       <TouchableOpacity style={styles.registerButton}>
         <Text style={styles.registerTitle}>Não tem conta?</Text>
         <Text style={styles.registerTitleBold}>Cadastre-se</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.fingerPrint}
+        onPress={() => Alert.alert("Sensor digital")}
+      >
+        <Text style={styles.fingerPrintTitle}>
+          Toque no sensor digital do seu celular
+        </Text>
+        <Ionicons name="finger-print" size={64} color="#5D5FEF" />
       </TouchableOpacity>
     </View>
   );

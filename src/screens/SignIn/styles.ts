@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
     color: "#5D5FEF",
     marginLeft: 5,
   },
+  fingerPrint: {
+    alignItems: "center",
+    marginTop: 40,
+  },
+  fingerPrintTitle: {
+    fontSize: 20,
+    color: "#5B5B5E",
+    marginBottom: 20,
+  },
 });
 
 export default styles;
