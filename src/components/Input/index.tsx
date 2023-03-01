@@ -13,14 +13,21 @@ type InputProps = TextInputProps & {
   name: string;
   onPress?: () => void;
   showPassword?: boolean | null;
+  inputRef?: React.RefObject<TextInput>;
 };
 
-export function Input({ name, onPress, showPassword, ...rest }: InputProps) {
+export function Input({
+  name,
+  onPress,
+  showPassword,
+  inputRef,
+  ...rest
+}: InputProps) {
   return (
     <View>
       <Text style={styles.name}>{name}</Text>
       <View style={styles.textInput}>
-        <TextInput {...rest} style={styles.input} />
+        <TextInput ref={inputRef} {...rest} style={styles.input} />
         {showPassword != null && (
           <TouchableOpacity onPress={onPress}>
             <Ionicons

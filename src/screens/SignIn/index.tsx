@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { TouchableOpacity, Text, View, Alert } from "react-native";
+import React, { useState, useRef } from "react";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -12,11 +12,15 @@ export function SigIn() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
+  const emailRef = useRef<TextInput>(null);
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  console.log(inputEmail);
+  const handleLogin = () => {
+    emailRef.current.clear();
+  };
 
   return (
     <View style={styles.container}>
@@ -31,6 +35,7 @@ export function SigIn() {
             autoCorrect={false}
             value={inputEmail}
             onChangeText={setInputEmail}
+            inputRef={emailRef}
           />
         </View>
         <Input
@@ -52,7 +57,7 @@ export function SigIn() {
         <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
       <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={() => Alert.alert("Realiza login")} />
+        <Button title="Login" onPress={handleLogin} />
       </View>
       <TouchableOpacity style={styles.registerButton}>
         <Text style={styles.registerTitle}>Não tem conta?</Text>
