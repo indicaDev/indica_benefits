@@ -9,10 +9,14 @@ import styles from "./styles";
 
 export function SigIn() {
   const [showPassword, setShowPassword] = useState(true);
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  console.log(inputEmail);
 
   return (
     <View style={styles.container}>
@@ -25,6 +29,8 @@ export function SigIn() {
             autoCapitalize="none"
             keyboardType="email-address"
             autoCorrect={false}
+            value={inputEmail}
+            onChangeText={setInputEmail}
           />
         </View>
         <Input
@@ -35,6 +41,8 @@ export function SigIn() {
           secureTextEntry={showPassword}
           showPassword={showPassword}
           onPress={toggleShowPassword}
+          value={inputPassword}
+          onChangeText={setInputPassword}
         />
       </View>
       <TouchableOpacity
