@@ -1,13 +1,14 @@
 import { SafeAreaView } from "react-native";
 
-import { SigIn } from "./src/screens/SignIn";
+import { SignIn } from "./src/screens/SignIn";
+import { SignUp } from "./src/screens/SignUp";
 
 import styles from "./src/styles/app";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <SigIn />
+      <SignUp />
     </SafeAreaView>
   );
 }

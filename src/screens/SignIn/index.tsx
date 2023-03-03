@@ -8,7 +8,7 @@ import { Button } from "../../components/Button";
 
 import styles from "./styles";
 
-export function SigIn() {
+export function SignIn() {
   const [showPassword, setShowPassword] = useState(true);
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
