@@ -1,14 +1,13 @@
 import { SafeAreaView } from "react-native";
 
-import { SignIn } from "./src/screens/SignIn";
-import { SignUp } from "./src/screens/SignUp";
+import { Routes } from "./src/routes";
 
 import styles from "./src/styles/app";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <SignIn />
+      <Routes />
     </SafeAreaView>
   );
 }

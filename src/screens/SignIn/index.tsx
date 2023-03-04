@@ -24,7 +24,7 @@ export function SignIn() {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header title="Login" hasGoBack={false} />
       <View style={styles.form}>
         <View style={styles.input}>
