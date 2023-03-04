@@ -8,7 +8,7 @@ import styles from "./src/styles/app";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <SignUp />
+      <SignIn />
     </SafeAreaView>
   );
 }
