@@ -25,6 +25,17 @@ const styles = StyleSheet.create({
     color: "#5B5B5E",
     marginRight: 5,
   },
+  balances: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 65,
+  },
+  balancesText: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#5B5B5E",
+  },
 });
 
 export default styles;
