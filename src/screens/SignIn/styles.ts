@@ -5,13 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFFFFF",
   },
-  form: {
-    paddingHorizontal: 20,
-    marginTop: 70,
-  },
-  input: {
-    marginBottom: 20,
-  },
   forgotPassword: {
     alignSelf: "center",
     marginTop: 21,
@@ -38,15 +31,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#5D5FEF",
     marginLeft: 5,
-  },
-  fingerPrint: {
-    alignItems: "center",
-    marginTop: 40,
-  },
-  fingerPrintTitle: {
-    fontSize: 20,
-    color: "#5B5B5E",
-    marginBottom: 20,
   },
 });
 

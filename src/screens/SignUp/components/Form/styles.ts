@@ -1,13 +1,12 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-  },
-  registerButton: {
+  form: {
     paddingHorizontal: 20,
     marginTop: 70,
+  },
+  input: {
+    marginBottom: 20,
   },
 });
 
