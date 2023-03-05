@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 54,
     flexDirection: "row",
     justifyContent: "space-between",
+    flexWrap: "wrap",
   },
 });
 

@@ -5,11 +5,12 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
     backgroundColor: "#F5F5F5",
+    justifyContent: "space-between",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#DEDEDE",
     padding: 10,
-    justifyContent: "space-between",
+    marginBottom: 20,
   },
   description: {
     flexDirection: "row",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Header } from "./components/Header";
@@ -23,6 +23,12 @@ export function Home() {
       categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
       isActive: false,
     },
+    {
+      title: "Refeição",
+      value: "350,00",
+      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
+      isActive: false,
+    },
   ];
 
   const toggleBalances = () => {
@@ -30,7 +36,7 @@ export function Home() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header />
 
       <Text style={styles.balanceAvailable}>
@@ -65,6 +71,6 @@ export function Home() {
           />
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 }
