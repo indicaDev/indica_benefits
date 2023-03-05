@@ -1,29 +1,28 @@
 import { useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { Header } from "./components/Header";
-
-import styles from "./styles";
 import { Card } from "./components/Card";
 
+import styles from "./styles";
+
 export function Home() {
+  const navigation = useNavigation();
+
   const [hideBalances, setHideBalances] = useState(false);
 
   const CARDS = [
     {
+      id: "1",
       title: "Alimentação",
       value: "400,50",
       categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
       isActive: true,
     },
     {
-      title: "Refeição",
-      value: "350,00",
-      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
-      isActive: false,
-    },
-    {
+      id: "2",
       title: "Refeição",
       value: "350,00",
       categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
@@ -33,6 +32,12 @@ export function Home() {
 
   const toggleBalances = () => {
     setHideBalances(!hideBalances);
+  };
+
+  const handleCardDetails = (cardId: string) => {
+    navigation.navigate("cardDetails", {
+      cardId,
+    });
   };
 
   return (
@@ -67,7 +72,7 @@ export function Home() {
             key={index}
             {...item}
             hideBalance={hideBalances}
-            onPress={() => Alert.alert("Detalhes do card")}
+            onPress={() => handleCardDetails(item.id)}
           />
         ))}
       </View>

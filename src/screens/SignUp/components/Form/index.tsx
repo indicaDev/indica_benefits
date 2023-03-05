@@ -1,9 +1,9 @@
+import { useRef, useState } from "react";
 import { TextInput, View } from "react-native";
 
 import { Input } from "../../../../components/Input";
 
 import styles from "./styles";
-import { useRef, useState } from "react";
 
 export function Form() {
   const [inputName, setInputName] = useState("");

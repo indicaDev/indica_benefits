@@ -3,6 +3,9 @@ export declare global {
     export interface RootParamList {
       signUp: undefined;
       tabs: undefined;
+      cardDetails: {
+        cardId: string;
+      };
     }
   }
 }

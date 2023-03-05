@@ -3,10 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
-
-import styles from "./styles";
 import { Form } from "./components/Form";
 import { FingerPrint } from "./components/FingerPrint";
+
+import styles from "./styles";
 
 export function SignIn() {
   const navigation = useNavigation();

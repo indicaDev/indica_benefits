@@ -1,13 +1,10 @@
-import { useRef, useState } from "react";
-import { Alert, TextInput, View } from "react-native";
+import { Alert, View } from "react-native";
 
 import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
-
-import styles from "./styles";
-
 import { Button } from "../../components/Button";
 import { Form } from "./components/Form";
+
+import styles from "./styles";
 
 export function SignUp() {
   return (
