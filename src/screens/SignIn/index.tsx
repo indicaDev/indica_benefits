@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -9,6 +10,8 @@ import { Button } from "../../components/Button";
 import styles from "./styles";
 
 export function SignIn() {
+  const navigation = useNavigation();
+
   const [showPassword, setShowPassword] = useState(true);
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -21,6 +24,10 @@ export function SignIn() {
 
   const handleLogin = () => {
     emailRef.current.clear();
+  };
+
+  const handleSignUp = () => {
+    navigation.navigate("signUp");
   };
 
   return (
@@ -60,7 +67,7 @@ export function SignIn() {
       <View style={styles.buttonContainer}>
         <Button title="Login" onPress={handleLogin} />
       </View>
-      <TouchableOpacity style={styles.registerButton}>
+      <TouchableOpacity style={styles.registerButton} onPress={handleSignUp}>
         <Text style={styles.registerTitle}>Não tem conta?</Text>
         <Text style={styles.registerTitleBold}>Cadastre-se</Text>
       </TouchableOpacity>
