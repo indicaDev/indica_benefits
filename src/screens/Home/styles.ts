@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#5B5B5E",
   },
+  cardsList: {
+    marginTop: 54,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 export default styles;

@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Header } from "./components/Header";
 
 import styles from "./styles";
+import { Card } from "./components/Card";
 
 export function Home() {
   const [hideBalances, setHideBalances] = useState(false);
@@ -38,6 +39,10 @@ export function Home() {
             color="#5D5FEF"
           />
         </TouchableOpacity>
+      </View>
+      <View style={styles.cardsList}>
+        <Card />
+        <Card />
       </View>
     </View>
   );
