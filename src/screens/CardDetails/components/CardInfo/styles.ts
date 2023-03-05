@@ -39,7 +39,12 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
     marginTop: 29,
+  },
+  statusActive: {
     color: "#4AAB54",
+  },
+  statusDisabled: {
+    color: "#FF0000",
   },
   movementsButton: {
     flexDirection: "row",

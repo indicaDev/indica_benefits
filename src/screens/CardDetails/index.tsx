@@ -16,12 +16,20 @@ export function CardDetails() {
 
   const { cardId } = route.params as CardDetailsParams;
 
+  const card = {
+    id: cardId,
+    category: "Alimentação",
+    cardNumber: "3873",
+    value: "400,50",
+    status: true,
+  };
+
   return (
     <View style={styles.container}>
       <Header title="Detalhes" />
 
       <View style={styles.infoBackground}>
-        <CardInfo />
+        <CardInfo card={card} />
       </View>
     </View>
   );
