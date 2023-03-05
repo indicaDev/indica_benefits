@@ -41,8 +41,21 @@ export function Home() {
         </TouchableOpacity>
       </View>
       <View style={styles.cardsList}>
-        <Card />
-        <Card />
+        <Card
+          title="Alimentação"
+          value="400,50"
+          categoryIcon="cart-outline"
+          hideBalance={hideBalances}
+          onPress={() => Alert.alert("Detalhes do card")}
+        />
+        <Card
+          title="Refeição"
+          value="350,00"
+          categoryIcon="cart-outline"
+          isActive={false}
+          hideBalance={hideBalances}
+          onPress={() => Alert.alert("Detalhes do card")}
+        />
       </View>
     </View>
   );

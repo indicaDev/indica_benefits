@@ -3,14 +3,38 @@ import { Ionicons } from "@expo/vector-icons";
 
 import styles from "./styles";
 
-export function Card() {
+interface CardProps {
+  title: string;
+  value: string;
+  isActive?: boolean;
+  categoryIcon: keyof typeof Ionicons.glyphMap;
+  hideBalance: boolean;
+  onPress: () => void;
+}
+
+export function Card({
+  isActive = true,
+  categoryIcon,
+  onPress,
+  title,
+  value,
+  hideBalance,
+}: CardProps) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.description}>
-        <Ionicons name="cart-outline" size={24} color="#5D5FEF" />
-        <Text style={styles.title}>Alimentação</Text>
+        <Ionicons
+          name={isActive ? categoryIcon : "md-warning-outline"}
+          size={24}
+          color={isActive ? "#5D5FEF" : "#FFCB09"}
+        />
+        <Text style={styles.title}>{title}</Text>
       </View>
-      <Text style={styles.value}>R$ 400,50</Text>
+      {isActive ? (
+        <Text style={styles.value}>R$ {hideBalance ? "* * *" : value}</Text>
+      ) : (
+        <Text style={styles.value}>Bloqueado</Text>
+      )}
       <View style={styles.arrowForwardIcon}>
         <Ionicons name="ios-arrow-forward" size={30} color="#5D5FEF" />
       </View>
