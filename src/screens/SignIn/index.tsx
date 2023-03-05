@@ -23,7 +23,8 @@ export function SignIn() {
   };
 
   const handleLogin = () => {
-    emailRef.current.clear();
+    //emailRef.current.clear();
+    navigation.navigate("tabs");
   };
 
   const handleSignUp = () => {
