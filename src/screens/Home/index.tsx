@@ -10,6 +10,21 @@ import { Card } from "./components/Card";
 export function Home() {
   const [hideBalances, setHideBalances] = useState(false);
 
+  const CARDS = [
+    {
+      title: "Alimentação",
+      value: "400,50",
+      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
+      isActive: true,
+    },
+    {
+      title: "Refeição",
+      value: "350,00",
+      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
+      isActive: false,
+    },
+  ];
+
   const toggleBalances = () => {
     setHideBalances(!hideBalances);
   };
@@ -41,21 +56,14 @@ export function Home() {
         </TouchableOpacity>
       </View>
       <View style={styles.cardsList}>
-        <Card
-          title="Alimentação"
-          value="400,50"
-          categoryIcon="cart-outline"
-          hideBalance={hideBalances}
-          onPress={() => Alert.alert("Detalhes do card")}
-        />
-        <Card
-          title="Refeição"
-          value="350,00"
-          categoryIcon="cart-outline"
-          isActive={false}
-          hideBalance={hideBalances}
-          onPress={() => Alert.alert("Detalhes do card")}
-        />
+        {CARDS.map((item, index) => (
+          <Card
+            key={index}
+            {...item}
+            hideBalance={hideBalances}
+            onPress={() => Alert.alert("Detalhes do card")}
+          />
+        ))}
       </View>
     </View>
   );
