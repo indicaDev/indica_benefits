@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
     height: 270,
     marginTop: 24,
   },
+  actionCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 140
+  }
 });
 
 export default styles;
