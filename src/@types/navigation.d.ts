@@ -6,6 +6,7 @@ export declare global {
       cardDetails: {
         cardId: string;
       };
+      moviments: undefined;
     }
   }
 }
