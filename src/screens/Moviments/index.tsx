@@ -24,57 +24,34 @@ export function Moviments() {
       id: 1,
       establishement: "Mercado dois irmões",
       date: "10/10/2023",
-      value: "R$ 100,00",
+      value: "100,00",
     },
     {
       id: 2,
-      establishement: "Mercado dois irmões",
+      establishement: "Mercado principal",
       date: "10/10/2023",
-      value: "R$ 100,00",
+      value: "100,00",
     },
     {
       id: 3,
-      establishement: "Mercado dois irmões",
+      establishement: "Loja das crianças",
       date: "10/10/2023",
-      value: "R$ 100,00",
+      value: "100,00",
     },
     {
       id: 4,
-      establishement: "Mercado dois irmões",
+      establishement: "Açougue do João",
       date: "10/10/2023",
-      value: "R$ 100,00",
-    },
-    {
-      id: 5,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "R$ 100,00",
-    },
-    {
-      id: 6,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "R$ 100,00",
-    },
-    {
-      id: 7,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "R$ 100,00",
-    },
-    {
-      id: 8,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "R$ 100,00",
-    },
-    {
-      id: 9,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "R$ 100,00",
+      value: "100,00",
     },
   ];
+
+  const filteredMoviments =
+    search.length > 0
+      ? moviments.filter((movement) =>
+          movement.establishement.toUpperCase().includes(search.toUpperCase())
+        )
+      : [];
 
   const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -90,13 +67,27 @@ export function Moviments() {
         />
       </View>
       <View style={styles.movimentsList}>
-        <FlatList
-          data={moviments}
-          renderItem={({ item }) => <MovimentItem key={item.id} item={item} />}
-          keyExtractor={(item) => item.id.toString()}
-          ItemSeparatorComponent={ItemSeparator}
-          ListEmptyComponent={() => <EmptyList />}
-        />
+        {search.length > 0 ? (
+          <FlatList
+            data={filteredMoviments}
+            renderItem={({ item }) => (
+              <MovimentItem key={item.id} item={item} />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            ItemSeparatorComponent={ItemSeparator}
+            ListEmptyComponent={() => <EmptyList />}
+          />
+        ) : (
+          <FlatList
+            data={moviments}
+            renderItem={({ item }) => (
+              <MovimentItem key={item.id} item={item} />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            ItemSeparatorComponent={ItemSeparator}
+            ListEmptyComponent={() => <EmptyList />}
+          />
+        )}
       </View>
       <View style={styles.buttonContainer}>
         <Button title="Cadastrar" onPress={() => {}} />
