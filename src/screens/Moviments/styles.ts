@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     buttonContainer: {
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        marginBottom: 20,
     },
     movimentsList: {
         flex: 1,

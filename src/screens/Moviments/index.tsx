@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Alert, FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 
 import { Button } from "../../components/Button";
 import { EmptyList } from "../../components/EmptyList";
 import { Header } from "../../components/Header";
-import { Modal } from "../../components/Modal";
 import { Search } from "../../components/Search";
 import { MovimentItem } from "./components/MovimentItem";
 
@@ -15,6 +14,7 @@ export interface MovimentsData {
   value: string;
 }
 
+import { MovimentModal } from "./components/MovimentModal";
 import styles from "./styles";
 
 export function Moviments() {
@@ -23,10 +23,6 @@ export function Moviments() {
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
-  };
-
-  const handleSubmit = () => {
-    Alert.alert("Cadastrar");
   };
 
   const moviments: MovimentsData[] = [
@@ -102,17 +98,7 @@ export function Moviments() {
       <View style={styles.buttonContainer}>
         <Button title="Cadastrar" onPress={toggleModal} />
       </View>
-      <Modal
-        modalVisible={modalVisible}
-        buttonTitle="Criar"
-        headerTitle="Cadastrar Movimentação"
-        onClose={toggleModal}
-        onAction={handleSubmit}
-      >
-        <View>
-          <Text>Teste</Text>
-        </View>
-      </Modal>
+      <MovimentModal modalVisible={modalVisible} toggleModal={toggleModal} />
     </View>
   );
 }
