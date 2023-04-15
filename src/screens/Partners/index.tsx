@@ -61,7 +61,7 @@ export function Partners() {
 
   return (
     <View style={styles.container}>
-      <Header title="Parceiros" />
+      <Header title="Parceiros" hasGoBack={false} />
       <View style={styles.searchContainer}>
         <Search
           placeholder="Pesquisar..."
