@@ -1,9 +1,9 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Home } from "../screens/Home";
-import { Profile } from "../screens/Profile";
 import { Partners } from "../screens/Partners";
+import { Profile } from "../screens/Profile";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -35,15 +35,7 @@ export function TabsRoutes() {
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
-        }}
-      />
-      <Screen
-        name="profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <Ionicons name="search-sharp" size={size} color={color} />
-          ),
+          title: "Início",
         }}
       />
       <Screen
@@ -51,8 +43,19 @@ export function TabsRoutes() {
         component={Partners}
         options={{
           tabBarIcon: ({ size, color }) => (
+            <Ionicons name="search-sharp" size={size} color={color} />
+          ),
+          title: "Parceiros",
+        }}
+      />
+      <Screen
+        name="profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ size, color }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
+          title: "Perfil",
         }}
       />
     </Navigator>
