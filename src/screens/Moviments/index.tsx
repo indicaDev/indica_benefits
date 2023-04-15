@@ -6,6 +6,7 @@ import { EmptyList } from "../../components/EmptyList";
 import { Header } from "../../components/Header";
 import { Search } from "../../components/Search";
 import { MovimentItem } from "./components/MovimentItem";
+import { MovimentModal } from "./components/MovimentModal";
 
 export interface MovimentsData {
   id: number;
@@ -14,7 +15,6 @@ export interface MovimentsData {
   value: string;
 }
 
-import { MovimentModal } from "./components/MovimentModal";
 import styles from "./styles";
 
 export function Moviments() {
