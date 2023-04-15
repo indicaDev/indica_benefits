@@ -11,7 +11,7 @@ export function Profile() {
   const navigation = useNavigation();
 
   const handlePersonalInfo = () => {
-    navigation.navigate("personalInfo");
+    navigation.navigate("personInfo");
   };
 
   const handleRegisterCard = () => {
@@ -31,7 +31,7 @@ export function Profile() {
       id: 1,
       icon: <Ionicons name="person" size={30} color="#9796A1" />,
       desciption: "Informações pessoais",
-      onPress: handleGetOut,
+      onPress: handlePersonalInfo,
     },
     {
       id: 2,

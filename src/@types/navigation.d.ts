@@ -8,6 +8,7 @@ export declare global {
         cardId: string;
       };
       moviments: undefined;
+      personInfo: undefined;
     }
   }
 }

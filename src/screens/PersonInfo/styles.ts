@@ -4,10 +4,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
-        paddingHorizontal: 20,
-    },
-    perfilList: {
-        marginTop: 40
     }
 });
 
