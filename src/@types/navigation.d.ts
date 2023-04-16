@@ -11,6 +11,7 @@ export declare global {
       personInfo: undefined;
       registerCard: undefined;
       rechargeCard: undefined;
+      extract: undefined;
     }
   }
 }

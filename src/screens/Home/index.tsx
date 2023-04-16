@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
-import { Header } from "./components/Header";
 import { Card } from "./components/Card";
+import { Header } from "./components/Header";
 
 import styles from "./styles";
 
@@ -40,6 +40,10 @@ export function Home() {
     });
   };
 
+  const handleExtract = () => {
+    navigation.navigate("extract");
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -49,10 +53,7 @@ export function Home() {
           hideBalances ? "* * *" : "700,50"
         } disponível no seu cartão.`}
       </Text>
-      <TouchableOpacity
-        style={styles.seeExtractButton}
-        onPress={() => Alert.alert("Ver o estrato")}
-      >
+      <TouchableOpacity style={styles.seeExtractButton} onPress={handleExtract}>
         <Text style={styles.seeExtractTitle}>Ver meu extrato</Text>
         <Ionicons name="ios-arrow-forward" size={30} color="#5D5FEF" />
       </TouchableOpacity>
