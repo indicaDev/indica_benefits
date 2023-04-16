@@ -21,6 +21,7 @@ export function Form() {
   };
 
   const [selectedCard, setSelectedCard] = useState(initialCard);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChanges = (name: keyof CardData, value: string) => {
     setSelectedCard({ ...selectedCard, [name]: value });
@@ -31,8 +32,13 @@ export function Form() {
   };
 
   const handleSubmit = () => {
-    Alert.alert("Cartão recarregado com sucesso!");
-    resetValues();
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+      Alert.alert("Cartão recarregado com sucesso!");
+      resetValues();
+    }, 3000);
   };
 
   return (
@@ -58,7 +64,11 @@ export function Form() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title="Recarregar" onPress={handleSubmit} />
+        <Button
+          title="Recarregar"
+          onPress={handleSubmit}
+          isLoading={isLoading}
+        />
       </View>
     </View>
   );
