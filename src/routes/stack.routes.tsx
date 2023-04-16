@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CardDetails } from "../screens/CardDetails";
 import { Moviments } from "../screens/Moviments";
 import { PersonInfo } from "../screens/PersonInfo";
+import { RechargeCard } from "../screens/RechargeCard";
 import { RegisterCard } from "../screens/RegisterCard";
 import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
@@ -19,6 +20,7 @@ export function StackRoutes() {
       <Screen name="moviments" component={Moviments} />
       <Screen name="personInfo" component={PersonInfo} />
       <Screen name="registerCard" component={RegisterCard} />
+      <Screen name="rechargeCard" component={RechargeCard} />
       <Screen name="tabs" component={TabsRoutes} />
     </Navigator>
   );
