@@ -9,6 +9,7 @@ export declare global {
       };
       moviments: undefined;
       personInfo: undefined;
+      registerCard: undefined;
     }
   }
 }
