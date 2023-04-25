@@ -5,6 +5,7 @@ import { Alert, TextInput, View } from "react-native";
 import { Button } from "../../../../components/Button";
 import { Input } from "../../../../components/Input";
 
+import { httpStatus } from "../../../../constants/httpStatus";
 import { api } from "../../../../services/api";
 
 interface User {
@@ -66,7 +67,7 @@ export function Form() {
     try {
       const { status } = await api.post("users", user);
 
-      if (status === 201) {
+      if (status === httpStatus.CREATED) {
         handleSignIn();
       }
     } catch (error) {

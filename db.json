@@ -40,6 +40,13 @@
       "password": "12345",
       "passwordConfirm": "12345",
       "id": 1
+    },
+    {
+      "name": "Indica",
+      "email": "indica@gmail.com",
+      "password": "indica",
+      "passwordConfirm": "indica",
+      "id": 2
     }
   ]
 }
