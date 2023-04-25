@@ -32,5 +32,14 @@
       "status": true,
       "id": 4
     }
+  ],
+  "users": [
+    {
+      "name": "Gilson",
+      "email": "gilson@gmail.com",
+      "password": "12345",
+      "passwordConfirm": "12345",
+      "id": 1
+    }
   ]
 }

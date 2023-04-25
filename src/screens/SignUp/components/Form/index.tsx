@@ -1,7 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
-import { TextInput, View } from "react-native";
+import { Alert, TextInput, View } from "react-native";
 
+import { Button } from "../../../../components/Button";
 import { Input } from "../../../../components/Input";
+
+import { api } from "../../../../services/api";
 
 interface User {
   name: string;
@@ -13,14 +17,17 @@ interface User {
 import styles from "./styles";
 
 export function Form() {
-  const [showPassword, setShowPassword] = useState(true);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(true);
-  const [user, setUser] = useState<User>({
+  const initialUser: User = {
     name: "",
     email: "",
     password: "",
     passwordConfirm: "",
-  });
+  };
+
+  const navigation = useNavigation();
+  const [showPassword, setShowPassword] = useState(true);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(true);
+  const [user, setUser] = useState<User>(initialUser);
 
   const nameRef = useRef<TextInput>(null);
   const emailRef = useRef<TextInput>(null);
@@ -37,6 +44,37 @@ export function Form() {
 
   const handleChange = (name: keyof User, value: string) => {
     setUser((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSignIn = () => {
+    navigation.navigate("signIn");
+  };
+
+  const resetValues = () => {
+    setUser(initialUser);
+  };
+
+  const handleSubmit = async () => {
+    if (!user.name || !user.email || !user.password) {
+      return Alert.alert("Preencha todos os campos!");
+    }
+
+    if (user.password !== user.passwordConfirm) {
+      return Alert.alert("As senhas não conferem!");
+    }
+
+    try {
+      const { status } = await api.post("users", user);
+
+      if (status === 201) {
+        handleSignIn();
+      }
+    } catch (error) {
+      Alert.alert("Erro ao realizar o cadastro!");
+      console.log("Error: ", error);
+    } finally {
+      resetValues();
+    }
   };
 
   return (
@@ -90,6 +128,9 @@ export function Form() {
         onChangeText={(value) => handleChange("passwordConfirm", value)}
         inputRef={passwordConfirmRef}
       />
+      <View style={styles.registerButton}>
+        <Button title="Cadastrar" onPress={handleSubmit} />
+      </View>
     </View>
   );
 }
