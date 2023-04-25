@@ -1,0 +1,36 @@
+{
+  "cards": [
+    {
+      "number": "232",
+      "surname": "232",
+      "category": "food",
+      "value": 70,
+      "status": true,
+      "id": 1
+    },
+    {
+      "number": "222",
+      "surname": "novo",
+      "category": "food",
+      "value": 70,
+      "status": true,
+      "id": 2
+    },
+    {
+      "number": "55",
+      "surname": "novo 2",
+      "category": "food",
+      "value": 130,
+      "status": true,
+      "id": 3
+    },
+    {
+      "number": "44",
+      "surname": "novo teste 3",
+      "category": "food",
+      "value": 0,
+      "status": true,
+      "id": 4
+    }
+  ]
+}

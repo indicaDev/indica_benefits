@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
 
 import { Button } from "../../../../components/Button";
 import { Input } from "../../../../components/Input";
 import { Select } from "../../../../components/Select";
 
-import { CARDS } from "../../constants";
+import { api } from "../../../../services/api";
+
+interface CardResponse {
+  label: string;
+  value: number;
+}
 
 interface CardData {
+  number: string;
+  surname: string;
+  category: string;
+  value: string;
+  status: boolean;
+  id: number;
+}
+
+interface CardSelect {
   selectedCard: string;
   selectedValue: string;
 }
@@ -15,15 +29,16 @@ interface CardData {
 import styles from "./styles";
 
 export function Form() {
-  const initialCard: CardData = {
+  const initialCard: CardSelect = {
     selectedCard: "",
     selectedValue: "",
   };
 
   const [selectedCard, setSelectedCard] = useState(initialCard);
   const [isLoading, setIsLoading] = useState(false);
+  const [cards, setCards] = useState<CardResponse[]>([]);
 
-  const handleChanges = (name: keyof CardData, value: string) => {
+  const handleChanges = (name: keyof CardSelect, value: string) => {
     setSelectedCard({ ...selectedCard, [name]: value });
   };
 
@@ -31,15 +46,60 @@ export function Form() {
     setSelectedCard(initialCard);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (!selectedCard.selectedCard) {
+      return Alert.alert("Selecione um cartão!");
+    }
+
+    if (!selectedCard.selectedValue) {
+      return Alert.alert("Selecione um valor!");
+    }
+
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-      Alert.alert("Cartão recarregado com sucesso!");
+    try {
+      const { data: card } = await api.get<CardData[]>("cards", {
+        params: {
+          id: selectedCard.selectedCard,
+        },
+      });
+
+      if (card.length === 0) {
+        throw new Error("Cartão não encontrado!");
+      }
+
+      const updatedCard = {
+        ...card[0],
+        value: card[0].value + Number(selectedCard.selectedValue),
+      };
+
+      await api.put(`cards/${selectedCard.selectedCard}`, updatedCard);
       resetValues();
-    }, 3000);
+      Alert.alert("Cartão recarregado com sucesso!");
+    } catch (error) {
+      console.error("error", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const filterSurnameAndId = (cardList: CardData[]): CardResponse[] => {
+    return cardList.map((obj) => ({ label: obj.surname, value: obj.id }));
+  };
+
+  const getAllCards = async () => {
+    try {
+      const { data } = await api.get<CardData[]>("/cards");
+      const filteredCards = filterSurnameAndId(data);
+      setCards(filteredCards);
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+
+  useEffect(() => {
+    getAllCards();
+  }, []);
 
   return (
     <View style={styles.form}>
@@ -47,7 +107,7 @@ export function Form() {
         <Select
           name="Cartão"
           placeholder="Selecione o cartão"
-          items={CARDS}
+          items={cards}
           value={selectedCard.selectedCard}
           onValueChange={(text) => handleChanges("selectedCard", text)}
         />

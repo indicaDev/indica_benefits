@@ -7,6 +7,9 @@ import { Select } from "../../../../components/Select";
 
 import { CATEGORIES } from "../../constants";
 
+import { httpStatus } from "../../../../constants/httpStatus";
+import { api } from "../../../../services/api";
+
 interface CardData {
   number: string;
   surname: string;
@@ -36,9 +39,23 @@ export function Form() {
     setCard(initialCardInfo);
   };
 
-  const handleSubmit = () => {
-    Alert.alert("Cartão cadastrado com sucesso!");
-    resetValues();
+  const handleSubmit = async () => {
+    if (!card.number || !card.surname || !card.category) {
+      Alert.alert("Preencha todos os campos!");
+      return;
+    }
+
+    try {
+      const { status } = await api.post<CardData>("/cards", card);
+
+      if (status === httpStatus.SUCCESS || status === httpStatus.CREATED) {
+        Alert.alert("Cartão cadastrado com sucesso!");
+      }
+    } catch (error) {
+      Alert.alert("Erro ao cadastrar o cartão!");
+    } finally {
+      resetValues();
+    }
   };
 
   return (
