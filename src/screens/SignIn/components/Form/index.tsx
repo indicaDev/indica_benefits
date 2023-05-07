@@ -1,6 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useRef, useState } from "react";
-import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 
 import { Button } from "../../../../components/Button";
 import { Input } from "../../../../components/Input";
@@ -12,6 +13,7 @@ interface User {
   password: string;
 }
 
+import { api } from "../../../../services/api";
 import styles from "./styles";
 
 export function Form() {
@@ -19,14 +21,12 @@ export function Form() {
     id: null,
     email: "",
     password: "",
-  }
+  };
 
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
-  const [user, setUser] = useState<User>(initialUser)
-
-  const emailRef = useRef<TextInput>(null);
-  const passwordRef = useRef<TextInput>(null);
+  const [user, setUser] = useState<User>(initialUser);
+  const [loading, setLoading] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -34,13 +34,38 @@ export function Form() {
 
   const handleChange = (name: keyof User, value: string) => {
     setUser((prevState) => ({ ...prevState, [name]: value }));
-  }
+  };
 
- 
+  const handleLogin = async () => {
+    if (!user.email || !user.password) {
+      return Alert.alert("Preencha todos os campos!");
+    }
 
-  const handleLogin = () => {
-    //emailRef.current.clear();
-    navigation.navigate("tabs");
+    setLoading(true);
+
+    try {
+      const { data } = await api.get<User[]>("users");
+
+      const userMatch = data.find((auth) => {
+        return auth.email === user.email && auth.password === user.password;
+      });
+
+      if (userMatch) {
+        if (userMatch.id) {
+          await AsyncStorage.setItem(
+            "@indica_benefits_user",
+            userMatch.id.toString()
+          );
+        }
+        navigation.navigate("tabs");
+      } else {
+        return Alert.alert("E-mail ou senha inválidos!");
+      }
+    } catch (error) {
+      Alert.alert("Erro ao fazer login");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSignUp = () => {
@@ -58,7 +83,6 @@ export function Form() {
           autoCorrect={false}
           value={user.email}
           onChangeText={(value) => handleChange("email", value)}
-          inputRef={emailRef}
         />
       </View>
       <Input
@@ -71,7 +95,6 @@ export function Form() {
         onPress={toggleShowPassword}
         value={user.password}
         onChangeText={(value) => handleChange("password", value)}
-        inputRef={passwordRef}
       />
       <TouchableOpacity
         style={styles.forgotPassword}
@@ -80,7 +103,7 @@ export function Form() {
         <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
       <View style={styles.buttonContainer}>
-        <Button title="Login" onPress={handleLogin} />
+        <Button title="Login" onPress={handleLogin} isLoading={loading} />
       </View>
       <TouchableOpacity style={styles.registerButton} onPress={handleSignUp}>
         <Text style={styles.registerTitle}>Não tem conta?</Text>
