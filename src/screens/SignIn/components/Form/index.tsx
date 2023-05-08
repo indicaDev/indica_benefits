@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import * as LocalAuthentication from "expo-local-authentication";
+import { useEffect, useState } from "react";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 
 import { Button } from "../../../../components/Button";
@@ -27,6 +28,7 @@ export function Form() {
   const [showPassword, setShowPassword] = useState(true);
   const [user, setUser] = useState<User>(initialUser);
   const [loading, setLoading] = useState(false);
+  const [hasSupportForBiometrics, setHasSupportForBiometrics] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -72,6 +74,39 @@ export function Form() {
     navigation.navigate("signUp");
   };
 
+  const checkBiomentricsSupport = async () => {
+    const biometrisRecord = await LocalAuthentication.isEnrolledAsync();
+
+    return biometrisRecord;
+  };
+
+  const checkBiometricHardwareSupport = async () => {
+    const biometricsHardwareSupport =
+      await LocalAuthentication.hasHardwareAsync();
+
+    if (!biometricsHardwareSupport) {
+      return;
+    }
+
+    const hasBiometricsEnrolled = await checkBiomentricsSupport();
+
+    setHasSupportForBiometrics(hasBiometricsEnrolled);
+  };
+
+  const handleAuthPress = async () => {
+    const { success } = await LocalAuthentication.authenticateAsync();
+
+    if (success) {
+      navigation.navigate("tabs");
+    } else {
+      Alert.alert("Autenticação falhou, tente novamente!");
+    }
+  };
+
+  useEffect(() => {
+    checkBiometricHardwareSupport();
+  }, []);
+
   return (
     <View style={styles.form}>
       <View style={styles.input}>
@@ -110,7 +145,7 @@ export function Form() {
         <Text style={styles.registerTitleBold}>Cadastre-se</Text>
       </TouchableOpacity>
 
-      <FingerPrint />
+      {hasSupportForBiometrics && <FingerPrint onPress={handleAuthPress} />}
     </View>
   );
 }
