@@ -20,8 +20,8 @@ import styles from "./styles";
 export function Form() {
   const initialUser: User = {
     id: null,
-    email: "",
-    password: "",
+    email: "gilson@gmail.com",
+    password: "12345",
   };
 
   const navigation = useNavigation();

@@ -5,7 +5,7 @@ export declare global {
       signUp: undefined;
       tabs: undefined;
       cardDetails: {
-        cardId: string;
+        cardId: number;
       };
       moviments: undefined;
       personInfo: undefined;

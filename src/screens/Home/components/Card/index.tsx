@@ -1,40 +1,52 @@
-import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import styles from "./styles";
 
 interface CardProps {
-  title: string;
-  value: string;
+  value: number;
   isActive?: boolean;
-  categoryIcon: keyof typeof Ionicons.glyphMap;
   hideBalance: boolean;
   onPress: () => void;
+  category: string;
 }
 
 export function Card({
   isActive = true,
-  categoryIcon,
   onPress,
-  title,
   value,
   hideBalance,
+  category,
 }: CardProps) {
+  const checkCategory = () => {
+    if (category === "food") {
+      return "Alimentação";
+    } else {
+      return "Refeição";
+    }
+  };
+
+  const checkStatus = () => {
+    if (isActive) {
+      return (
+        <Text style={styles.value}>R$ {hideBalance ? "* * *" : value}</Text>
+      );
+    } else {
+      return <Text style={styles.value}>Bloqueado</Text>;
+    }
+  };
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.description}>
         <Ionicons
-          name={isActive ? categoryIcon : "md-warning-outline"}
+          name={isActive ? "cart-outline" : "md-warning-outline"}
           size={24}
           color={isActive ? "#5D5FEF" : "#FFCB09"}
         />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{checkCategory()}</Text>
       </View>
-      {isActive ? (
-        <Text style={styles.value}>R$ {hideBalance ? "* * *" : value}</Text>
-      ) : (
-        <Text style={styles.value}>Bloqueado</Text>
-      )}
+      {checkStatus()}
       <View style={styles.arrowForwardIcon}>
         <Ionicons name="ios-arrow-forward" size={30} color="#5D5FEF" />
       </View>

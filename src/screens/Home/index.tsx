@@ -1,40 +1,40 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { Card } from "./components/Card";
 import { Header } from "./components/Header";
 
+interface Card {
+  id: number;
+  number: string;
+  surname: string;
+  category: string;
+  value: number;
+  status: string;
+}
+
+import { api } from "../../services/api";
+import { formatToBrazilianCurrency } from "../../utils/currency";
 import styles from "./styles";
 
 export function Home() {
   const navigation = useNavigation();
 
   const [hideBalances, setHideBalances] = useState(false);
+  const [cards, setCards] = useState<Card[]>([]);
 
-  const CARDS = [
-    {
-      id: "1",
-      title: "Alimentação",
-      value: "400,50",
-      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
-      isActive: true,
-    },
-    {
-      id: "2",
-      title: "Refeição",
-      value: "350,00",
-      categoryIcon: "cart-outline" as keyof typeof Ionicons.glyphMap,
-      isActive: false,
-    },
-  ];
+  const availableValue = cards.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.value,
+    0
+  );
 
   const toggleBalances = () => {
     setHideBalances(!hideBalances);
   };
 
-  const handleCardDetails = (cardId: string) => {
+  const handleCardDetails = (cardId: number) => {
     navigation.navigate("cardDetails", {
       cardId,
     });
@@ -44,13 +44,27 @@ export function Home() {
     navigation.navigate("extract");
   };
 
+  const getAllCards = async () => {
+    try {
+      const { data } = await api.get<Card[]>("cards");
+
+      setCards(data);
+    } catch (error) {
+      Alert.alert("Erro ao carregar os cartões");
+    }
+  };
+
+  useEffect(() => {
+    getAllCards();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
       <Header />
 
       <Text style={styles.balanceAvailable}>
-        {`Você possui R$ ${
-          hideBalances ? "* * *" : "700,50"
+        {`Você possui ${
+          hideBalances ? "* * *" : formatToBrazilianCurrency(availableValue)
         } disponível no seu cartão.`}
       </Text>
       <TouchableOpacity style={styles.seeExtractButton} onPress={handleExtract}>
@@ -68,9 +82,9 @@ export function Home() {
         </TouchableOpacity>
       </View>
       <View style={styles.cardsList}>
-        {CARDS.map((item, index) => (
+        {cards.map((item, _) => (
           <Card
-            key={index}
+            key={item.id}
             {...item}
             hideBalance={hideBalances}
             onPress={() => handleCardDetails(item.id)}
