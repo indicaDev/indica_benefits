@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import { formatToBrazilianCurrency } from "../../../../utils/currency";
+
 import styles from "./styles";
 
 interface CardProps {
@@ -29,7 +31,9 @@ export function Card({
   const checkStatus = () => {
     if (isActive) {
       return (
-        <Text style={styles.value}>R$ {hideBalance ? "* * *" : value}</Text>
+        <Text style={styles.value}>
+          {hideBalance ? "* * *" : formatToBrazilianCurrency(value)}
+        </Text>
       );
     } else {
       return <Text style={styles.value}>Bloqueado</Text>;

@@ -6,17 +6,18 @@ import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Card } from "./components/Card";
 import { Header } from "./components/Header";
 
-interface Card {
+export interface Card {
   id: number;
   number: string;
   surname: string;
   category: string;
   value: number;
-  status: string;
+  status: boolean;
 }
 
 import { api } from "../../services/api";
 import { formatToBrazilianCurrency } from "../../utils/currency";
+
 import styles from "./styles";
 
 export function Home() {

@@ -2,14 +2,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import { formatToBrazilianCurrency } from "../../../../utils/currency";
+import { returnLastCardNumber } from "../../../../utils/returnLastCardNumber";
+
 import styles from "./styles";
 
 interface CardInfoProps {
   card: {
-    id: string;
+    id: number;
     category: string;
-    cardNumber: string;
-    value: string;
+    number: string;
+    value: number;
     status: boolean;
   };
 }
@@ -23,9 +26,13 @@ export function CardInfo({ card }: CardInfoProps) {
 
   return (
     <View style={styles.info}>
-      <Text style={styles.category}>{card.category}</Text>
-      <Text style={styles.cardNumber}>Final {card.cardNumber}</Text>
-      <Text style={styles.value}>R$ {card.value}</Text>
+      <Text style={styles.category}>
+        {card.category === "food" ? "Alimentação" : "Refeição"}
+      </Text>
+      <Text style={styles.cardNumber}>
+        Final {returnLastCardNumber(Number(card.number))}
+      </Text>
+      <Text style={styles.value}>{formatToBrazilianCurrency(card.value)}</Text>
       <Text
         style={[
           styles.status,
