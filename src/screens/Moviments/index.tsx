@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 
 import { Button } from "../../components/Button";
@@ -8,6 +9,7 @@ import { Search } from "../../components/Search";
 import { MovimentItem } from "./components/MovimentItem";
 import { MovimentModal } from "./components/MovimentModal";
 
+import { api } from "../../services/api";
 export interface MovimentsData {
   id: number;
   establishement: string;
@@ -15,42 +17,23 @@ export interface MovimentsData {
   value: string;
 }
 
+interface MovimentsParams {
+  cardId: string;
+}
+
 import styles from "./styles";
 
 export function Moviments() {
+  const route = useRoute();
   const [search, setSearch] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [moviments, setMoviments] = useState<MovimentsData[]>([]);
+
+  const { cardId } = route.params as MovimentsParams;
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
-
-  const moviments: MovimentsData[] = [
-    {
-      id: 1,
-      establishement: "Mercado dois irmões",
-      date: "10/10/2023",
-      value: "100,00",
-    },
-    {
-      id: 2,
-      establishement: "Mercado principal",
-      date: "10/10/2023",
-      value: "100,00",
-    },
-    {
-      id: 3,
-      establishement: "Loja das crianças",
-      date: "10/10/2023",
-      value: "100,00",
-    },
-    {
-      id: 4,
-      establishement: "Açougue do João",
-      date: "10/10/2023",
-      value: "100,00",
-    },
-  ];
 
   const filteredMoviments =
     search.length > 0
@@ -61,12 +44,28 @@ export function Moviments() {
 
   const ItemSeparator = () => <View style={styles.separator} />;
 
+  const getAllMoviments = async () => {
+    try {
+      const { data } = await api.get<MovimentsData[]>(
+        `moviments?cardId=${cardId}`
+      );
+
+      setMoviments(data);
+    } catch (error) {
+      throw new Error(`Erro ao buscar as movimentações: ${error.message}`);
+    }
+  };
+
+  useEffect(() => {
+    getAllMoviments();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header title="Movimentações" />
       <View style={styles.searchContainer}>
         <Search
-          placeholder="Pesquisar..."
+          placeholder="Pesquisaras..."
           autoCapitalize="none"
           value={search}
           onChangeText={(text: string) => setSearch(text)}

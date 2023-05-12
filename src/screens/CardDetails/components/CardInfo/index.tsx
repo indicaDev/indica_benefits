@@ -21,7 +21,9 @@ export function CardInfo({ card }: CardInfoProps) {
   const navigation = useNavigation();
 
   const handleMovements = () => {
-    navigation.navigate("moviments");
+    navigation.navigate("moviments", {
+      cardId: card.id,
+    });
   };
 
   return (
