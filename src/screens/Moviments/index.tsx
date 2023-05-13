@@ -12,7 +12,7 @@ import { MovimentModal } from "./components/MovimentModal";
 import { api } from "../../services/api";
 export interface MovimentsData {
   id: number;
-  establishement: string;
+  establishment: string;
   date: string;
   value: string;
 }
@@ -38,7 +38,7 @@ export function Moviments() {
   const filteredMoviments =
     search.length > 0
       ? moviments.filter((movement) =>
-          movement.establishement.toUpperCase().includes(search.toUpperCase())
+          movement.establishment.toUpperCase().includes(search.toUpperCase())
         )
       : [];
 
@@ -97,7 +97,12 @@ export function Moviments() {
       <View style={styles.buttonContainer}>
         <Button title="Cadastrar" onPress={toggleModal} />
       </View>
-      <MovimentModal modalVisible={modalVisible} toggleModal={toggleModal} />
+      <MovimentModal
+        cardId={cardId}
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+        getAllMoviments={getAllMoviments}
+      />
     </View>
   );
 }

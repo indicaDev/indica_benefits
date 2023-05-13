@@ -12,7 +12,7 @@ interface CardResponse {
   value: number;
 }
 
-interface CardData {
+export interface CardData {
   number: string;
   surname: string;
   category: string;
@@ -77,7 +77,7 @@ export function Form() {
       resetValues();
       Alert.alert("Cartão recarregado com sucesso!");
     } catch (error) {
-      console.error("error", error);
+      console.error("error", error.message);
     } finally {
       setIsLoading(false);
     }

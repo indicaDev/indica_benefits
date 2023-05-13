@@ -4,7 +4,7 @@
       "number": "123456789",
       "surname": "232",
       "category": "food",
-      "value": 90,
+      "value": "20",
       "status": true,
       "id": 1
     },
@@ -33,5 +33,34 @@
       "id": 2
     }
   ],
-  "moviments": []
+  "moviments": [
+    {
+      "establishment": "Teste",
+      "date": "12/12/2023",
+      "category": "Teste",
+      "value": "30",
+      "cardId": 1,
+      "id": 1
+    },
+    {
+      "establishment": "Nova",
+      "date": "12/12/2024",
+      "category": "Alimentação",
+      "value": "10",
+      "cardId": 1,
+      "id": 2
+    }
+  ],
+  "partners": [
+    {
+      "establishment": "Teste",
+      "category": "Teste",
+      "id": 1
+    },
+    {
+      "establishment": "Nova",
+      "category": "Alimentação",
+      "id": 2
+    }
+  ]
 }

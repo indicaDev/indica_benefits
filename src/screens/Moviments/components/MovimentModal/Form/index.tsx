@@ -1,7 +1,18 @@
 import { useRef, useState } from "react";
-import { TextInput, View } from "react-native";
+import { Alert, TextInput, View } from "react-native";
 
+import { Button } from "../../../../../components/Button";
 import { Input } from "../../../../../components/Input";
+
+import { httpStatus } from "../../../../../constants/httpStatus";
+import { api } from "../../../../../services/api";
+
+import { CardData } from "../../../../RechargeCard/components/Form";
+
+interface FormProps {
+  cardId: string;
+  getAllMoviments: () => void;
+}
 
 interface Moviment {
   establishment: string;
@@ -12,12 +23,13 @@ interface Moviment {
 
 import styles from "./styles";
 
-export function Form() {
+export function Form({ cardId, getAllMoviments }: FormProps) {
   const initialMoviment = {
     establishment: "",
     date: "",
     category: "",
     value: "",
+    cardId: cardId,
   };
 
   const [moviment, setMoviment] = useState(initialMoviment);
@@ -33,6 +45,76 @@ export function Form() {
 
   const resetForm = () => {
     setMoviment(initialMoviment);
+  };
+
+  const payWithTheCard = async () => {
+    try {
+      const { data: card } = await api.get<CardData[]>("cards", {
+        params: {
+          id: cardId,
+        },
+      });
+
+      if (cardId.length === 0) {
+        throw new Error("Cartão não encontrado!");
+      }
+      const updatedCard: CardData = {
+        ...card[0],
+        value: String(Number(card[0].value) - Number(moviment.value)),
+      };
+
+      await api.put(`cards/${cardId}`, updatedCard);
+
+      return true;
+    } catch (error) {
+      Alert.alert("Erro ao pagar com o cartão!");
+      return false;
+    }
+  };
+
+  const createPartners = async () => {
+    try {
+      const { status } = await api.post("partners", {
+        establishment: moviment.establishment,
+        category: moviment.category,
+      });
+
+      if (status === httpStatus.SUCCESS || status === httpStatus.CREATED) {
+        return true;
+      }
+    } catch (error) {
+      Alert.alert("Erro ao criar parceiros!");
+      return false;
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (
+      !moviment.establishment ||
+      !moviment.date ||
+      !moviment.category ||
+      !moviment.value
+    ) {
+      return Alert.alert("Preencha todos os campos!");
+    }
+
+    try {
+      const { status } = await api.post("moviments", moviment);
+
+      if (status === httpStatus.SUCCESS || status === httpStatus.CREATED) {
+        if (payWithTheCard() && createPartners()) {
+          getAllMoviments();
+          return Alert.alert("Movimentação cadastrada com sucesso!");
+        }
+        return Alert.alert(
+          "Ops, confira se o cadastro foi realizado corretamente!"
+        );
+      }
+    } catch (error) {
+      Alert.alert("Erro ao cadastrar a movimentação!");
+    } finally {
+      resetForm();
+    }
   };
 
   return (
@@ -80,6 +162,9 @@ export function Form() {
           onChangeText={(value) => handleChange("value", value)}
           inputRef={valueRef}
         />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Cadastrar" onPress={handleSubmit} />
       </View>
     </View>
   );
