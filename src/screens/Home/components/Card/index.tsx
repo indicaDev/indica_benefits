@@ -32,7 +32,7 @@ export function Card({
     if (isActive) {
       return (
         <Text style={styles.value}>
-          {hideBalance ? "* * *" : formatToBrazilianCurrency(value)}
+          {hideBalance ? "* * *" : formatToBrazilianCurrency(Number(value))}
         </Text>
       );
     } else {

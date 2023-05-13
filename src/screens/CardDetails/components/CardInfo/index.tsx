@@ -34,7 +34,9 @@ export function CardInfo({ card }: CardInfoProps) {
       <Text style={styles.cardNumber}>
         Final {returnLastCardNumber(Number(card.number))}
       </Text>
-      <Text style={styles.value}>{formatToBrazilianCurrency(card.value)}</Text>
+      <Text style={styles.value}>
+        {formatToBrazilianCurrency(Number(card.value))}
+      </Text>
       <Text
         style={[
           styles.status,
