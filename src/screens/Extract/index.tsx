@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View } from "react-native";
 
 import { EmptyList } from "../../components/EmptyList";
 import { Header } from "../../components/Header";
@@ -20,6 +20,7 @@ import styles from "./styles";
 export function Extract() {
   const [search, setSearch] = useState("");
   const [extracts, setExtracts] = useState<ExtractsData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const filteredExtracts =
     search.length > 0
@@ -37,6 +38,10 @@ export function Extract() {
       setExtracts(data);
     } catch (error) {
       throw new Error(`Erro ao buscar as movimentações: ${error.message}`);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     }
   };
 
@@ -56,7 +61,9 @@ export function Extract() {
         />
       </View>
       <View style={styles.extractList}>
-        {search.length > 0 ? (
+        {loading ? (
+          <ActivityIndicator color="#5D5FEF" size="large" />
+        ) : search.length > 0 ? (
           <FlatList
             data={filteredExtracts}
             renderItem={({ item }) => <ExtractItem key={item.id} item={item} />}

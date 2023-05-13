@@ -4,7 +4,7 @@
       "number": "123456789",
       "surname": "232",
       "category": "food",
-      "value": "20",
+      "value": "5",
       "status": true,
       "id": 1
     },
@@ -49,6 +49,14 @@
       "value": "10",
       "cardId": 1,
       "id": 2
+    },
+    {
+      "establishment": "Testando",
+      "date": "12/11/2023",
+      "category": "Teste",
+      "value": "15",
+      "cardId": 1,
+      "id": 3
     }
   ],
   "partners": [
@@ -61,6 +69,11 @@
       "establishment": "Nova",
       "category": "Alimentação",
       "id": 2
+    },
+    {
+      "establishment": "Testando",
+      "category": "Teste",
+      "id": 3
     }
   ]
 }

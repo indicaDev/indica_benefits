@@ -33,6 +33,7 @@ export function Form({ cardId, getAllMoviments }: FormProps) {
   };
 
   const [moviment, setMoviment] = useState(initialMoviment);
+  const [loading, setLoading] = useState(false);
 
   const nameRef = useRef<TextInput>(null);
   const dateRef = useRef<TextInput>(null);
@@ -89,12 +90,16 @@ export function Form({ cardId, getAllMoviments }: FormProps) {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (
       !moviment.establishment ||
       !moviment.date ||
       !moviment.category ||
       !moviment.value
     ) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       return Alert.alert("Preencha todos os campos!");
     }
 
@@ -114,6 +119,7 @@ export function Form({ cardId, getAllMoviments }: FormProps) {
       Alert.alert("Erro ao cadastrar a movimentação!");
     } finally {
       resetForm();
+      setLoading(false);
     }
   };
 
@@ -164,7 +170,7 @@ export function Form({ cardId, getAllMoviments }: FormProps) {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Cadastrar" onPress={handleSubmit} />
+        <Button title="Cadastrar" isLoading={loading} onPress={handleSubmit} />
       </View>
     </View>
   );
