@@ -25,9 +25,11 @@ export function Home() {
 
   const [hideBalances, setHideBalances] = useState(false);
   const [cards, setCards] = useState<Card[]>([]);
+  const [load, setLoad] = useState(true);
 
   const availableValue = cards.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.value,
+    (accumulator, currentValue) =>
+      Number(accumulator) + Number(currentValue.value),
     0
   );
 
@@ -46,6 +48,7 @@ export function Home() {
   };
 
   const getAllCards = async () => {
+    navigation.addListener("focus", () => setLoad(!load));
     try {
       const { data } = await api.get<Card[]>("cards");
 
@@ -57,7 +60,7 @@ export function Home() {
 
   useEffect(() => {
     getAllCards();
-  }, []);
+  }, [navigation, load]);
 
   return (
     <ScrollView style={styles.container}>

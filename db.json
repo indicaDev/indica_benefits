@@ -4,7 +4,7 @@
       "number": "123456789",
       "surname": "232",
       "category": "food",
-      "value": "5",
+      "value": "205",
       "status": true,
       "id": 1
     },
@@ -12,7 +12,7 @@
       "number": "222",
       "surname": "novo",
       "category": "snack",
-      "value": 70,
+      "value": "370",
       "status": false,
       "id": 2
     },

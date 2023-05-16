@@ -70,7 +70,9 @@ export function Form() {
 
       const updatedCard = {
         ...card[0],
-        value: card[0].value + Number(selectedCard.selectedValue),
+        value: String(
+          Number(card[0].value) + Number(selectedCard.selectedValue)
+        ),
       };
 
       await api.put(`cards/${selectedCard.selectedCard}`, updatedCard);

@@ -35,7 +35,6 @@ export function Partners() {
   useEffect(() => {
     (async () => {
       const { data } = await api.get<PartnersData[]>("partners");
-      console.log(data);
       setPartners(data);
       setLoading(false);
     })();
