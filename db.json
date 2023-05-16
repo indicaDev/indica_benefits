@@ -15,6 +15,22 @@
       "value": 70,
       "status": false,
       "id": 2
+    },
+    {
+      "number": "222",
+      "surname": "Novo teste",
+      "category": "snack",
+      "value": 50,
+      "status": false,
+      "id": 3
+    },
+    {
+      "number": "44",
+      "surname": "teste hoje",
+      "category": "food",
+      "value": 0,
+      "status": true,
+      "id": 4
     }
   ],
   "users": [

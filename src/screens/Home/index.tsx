@@ -83,14 +83,16 @@ export function Home() {
         </TouchableOpacity>
       </View>
       <View style={styles.cardsList}>
-        {cards.map((item, _) => (
-          <Card
-            key={item.id}
-            {...item}
-            hideBalance={hideBalances}
-            onPress={() => handleCardDetails(item.id)}
-          />
-        ))}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {cards.map((item, _) => (
+            <Card
+              key={item.id}
+              {...item}
+              hideBalance={hideBalances}
+              onPress={() => handleCardDetails(item.id)}
+            />
+          ))}
+        </ScrollView>
       </View>
     </ScrollView>
   );

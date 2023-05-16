@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     borderColor: "#DEDEDE",
     padding: 10,
     marginBottom: 20,
+    marginRight: 20,
   },
   description: {
     flexDirection: "row",
